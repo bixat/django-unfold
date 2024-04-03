@@ -60,8 +60,8 @@
 {% endblock %}
 
 {% block content %}
-    <div id="content-main">
-        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>
+    <div id="content-main" x-data="{open: false }" @keydown.escape.window="open = false">
+        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form{% if is_popup %}_popup{% endif %}" novalidate>
             {% csrf_token %}
 
             {% if actions_detail %}
@@ -115,13 +115,66 @@
                 {% block after_related_objects %}{% endblock %}
 
                 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
-
+                
                 {% block admin_change_form_document_ready %}
                     <script id="django-admin-form-add-constants" src="{% static 'admin/js/change_form.js' %}"{% if adminform and add %} data-model-name="{{ opts.model_name }}"{% endif %} async></script>
+                    <script>
+                        var url = '';
+                        function saveRelated(model) {
+                        let form = document.getElementById(model+'_form_popup');
+                        if (!form) {
+                            console.error('Form not found');
+                            return;
+                        }
+
+                        // Serialize form data
+                        let formData = new FormData(form);
+
+                        // Fetch options
+                        let fetchOptions = {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                            }
+                        };
+
+                        // Post the form data
+                        fetch(url, fetchOptions)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.text();
+                            })
+                            .then(data => {
+                                document.getElementById('related-content').innerHTML = data;
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                    function showModalWithContent(hrefData) {
+                        url = hrefData;
+                        fetch(hrefData)
+                            .then(response => response.text())
+                            .then(data => {
+                                document.getElementById('related-content').innerHTML = data;
+                            })
+                            .catch(error => console.error('Error fetching the data:', error));
+                    }
+                </script>
                 {% endblock %}
 
                 {% prepopulated_fields_js %}
             </div>
         </form>
+        <div x-show="open" @click.away="open = false" class="fixed z-50 end-0 top-0 overflow-y-auto bg-gray-50 dark:bg-gray-900 h-screen">
+            <div id="related-content"></div>
+        <button @click="open = false" type="button" class="absolute top-0 end-0 p-4 text-red-600">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+            
+        </div>
     </div>
 {% endblock %}

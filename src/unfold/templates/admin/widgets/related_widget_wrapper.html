@@ -12,7 +12,9 @@
                             <a class="related-widget-wrapper-link change-related border cursor-pointer flex items-center h-9.5 justify-center ms-2 rounded shadow-sm shrink-0 text-gray-400 text-sm transition-colors w-9.5 hover:text-gray-700 dark:border-gray-700 dark:text-gray-500 dark:hover:text-gray-200"
                                id="change_id_{{ name }}"
                                data-popup="yes"
-                               data-href-template="{{ change_related_template_url }}?{{ url_params }}"
+                               @click="open = true"
+                               onclick="showModalWithContent('{{ add_related_url }}?{{ url_params }}')"
+                               {% comment %} data-href-template="{{ change_related_template_url }}?{{ url_params }}" {% endcomment %}
                                title="{% blocktranslate %}Change selected {{ model }}{% endblocktranslate %}">
                                 <span class="material-symbols-outlined text-sm">edit</span>
                             </a>
@@ -21,8 +23,10 @@
                         {% if can_add_related %}
                             <a class="related-widget-wrapper-link add-related border cursor-pointer flex items-center h-9.5 justify-center ms-2 rounded shadow-sm shrink-0 text-gray-400 text-sm transition-colors w-9.5 hover:text-gray-700 dark:border-gray-700 dark:text-gray-500 dark:hover:text-gray-200"
                                data-popup="yes"
+                               @click="open = true"
+                               onclick="showModalWithContent('{{ add_related_url }}?{{ url_params }}')"
                                id="add_id_{{ name }}"
-                                href="{{ add_related_url }}?{{ url_params }}"
+                                {% comment %} href="{{ add_related_url }}?{{ url_params }}" {% endcomment %}
                                 title="{% blocktranslate %}Add another {{ model }}{% endblocktranslate %}">
                                 <span class="material-symbols-outlined text-sm">add</span>
                             </a>

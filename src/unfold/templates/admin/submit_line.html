@@ -6,7 +6,8 @@
             <div class="container flex flex-col-reverse gap-3 items-center mx-auto lg:flex-row-reverse rtl:lg:flex-row">
                 {% block submit-row %}
                     {% if show_save %}
-                        <button type="submit" name="_save" class="bg-primary-600 block border border-transparent font-medium px-3 py-2 rounded-md text-sm text-white w-full lg:w-auto">
+                    
+                        <button {% if not is_popup %}type="submit"{% else %}type="button" onclick="saveRelated('{{ opts.model_name }}')"{%endif%} name="_save" class="bg-primary-600 block border border-transparent font-medium px-3 py-2 rounded-md text-sm text-white w-full lg:w-auto">
                             {% translate 'Save' %}
                         </button>
                     {% endif %}
