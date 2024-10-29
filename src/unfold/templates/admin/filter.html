@@ -14,7 +14,7 @@
     {% if spec|class_name == "BooleanFieldListFilter" %}
         <ul class="border-l-4 border-gray-200 flex pl-4 py-2  dark:border-gray-700">
             {% for choice in choices %}
-                <li class="{% if choice.selected %}font-medium text-primary-600 dark:text-primary-500 dark{% else %}hover:text-gray-700 dark:hover:text-gray-200{% endif %} pr-4">
+                <li class="{% if choice.selected %}font-medium text-primary-600 dark:text-primary-500 dark{% else %}hover:text-gray-700 dark:hover:text-gray-200{% endif %} ps-4">
                     <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">
                         {{ choice.display }}
                     </a>

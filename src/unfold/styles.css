@@ -161,7 +161,7 @@ table tr.selected th {
 }
 
 .timezonewarning {
-  @apply absolute block items-center right-20 top-2.5 text-gray-500 truncate;
+  @apply absolute block items-center end-20 top-2.5 text-gray-500 truncate;
   font-size: 0;
 }
 
@@ -170,7 +170,7 @@ table tr.selected th {
 }
 
 .timezonewarning:hover:before {
-  @apply hidden mr-2;
+  @apply hidden ms-2;
 }
 
 .timezonewarning:before {
@@ -643,5 +643,5 @@ trix-toolbar[id^="trix-toolbar-"] {
 }
 
 .simplebar-horizontal-scrollbar-top .simplebar-track.simplebar-horizontal {
-  @apply top-9
+  @apply top-9;
 }

@@ -9,7 +9,7 @@
                 {% trans "Filter" %}
 
                 {% if cl.is_facets_optional %}
-                    <span id="changelist-filter-extra-actions" class="font-normal ml-3 text-primary-600 text-sm dark:text-primary-500">
+                    <span id="changelist-filter-extra-actions" class="font-normal ms-3 text-primary-600 text-sm dark:text-primary-500">
                         {% if cl.is_facets_optional %}
                             {% if cl.add_facets %}
                                 <a href="{{ cl.remove_facet_link }}" class="hidelink">
@@ -25,12 +25,12 @@
                 {% endif %}
 
                 {% if cl.has_active_filters %}
-                    <a href="{{ cl.clear_all_filters_qs }}" class="font-normal ml-3 text-sm text-red-600 dark:text-red-500">
+                    <a href="{{ cl.clear_all_filters_qs }}" class="font-normal ms-3 text-sm text-red-600 dark:text-red-500">
                         {% trans "Clear all filters" %}
                     </a>
                 {% endif %}
 
-                <a class="cursor-pointer material-symbols-outlined md-18 ml-auto pl-4 text-gray-400 transition-colors hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" x-on:click="filterOpen = false">
+                <a class="cursor-pointer material-symbols-outlined md-18 ms-auto pl-4 text-gray-400 transition-colors hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" x-on:click="filterOpen = false">
                     close
                 </a>
             </h3>
@@ -54,7 +54,7 @@
                 {% endfor %}
 
                 {% if cl.model_admin.list_filter_submit %}
-                    <div class="bg-gray-50 border-gray-200 border-t bottom-4 fixed px-6 py-3 right-4 rounded-b w-96 dark:bg-gray-700 dark:border-gray-600">
+                    <div class="bg-gray-50 border-gray-200 border-t bottom-4 fixed px-6 py-3 start-4 rounded-b w-96 dark:bg-gray-700 dark:border-gray-600">
                         <button type="submit" class="bg-primary-600 block border border-transparent font-medium px-3 py-2 rounded-md self-end text-sm text-white w-full">
                             {% trans "Apply Filters" %}
                         </button>

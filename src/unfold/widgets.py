@@ -44,7 +44,7 @@ LABEL_CLASSES = [
 
 CHECKBOX_LABEL_CLASSES = [
     "font-medium",
-    "ml-2",
+    "ms-2",
     "text-sm",
     "text-font-important-light",
     "dark:text-font-important-dark",
@@ -112,7 +112,7 @@ TEXTAREA_EXPANDABLE_CLASSES = [
 
 SELECT_CLASSES = [
     *BASE_INPUT_CLASSES,
-    "pr-8",
+    "ps-8",
     "max-w-2xl",
     "appearance-none",
 ]
@@ -167,7 +167,7 @@ CHECKBOX_CLASSES = [
     "after:justify-center",
     "after:leading-none",
     "after:material-symbols-outlined",
-    "after:-ml-px",
+    "after:-ms-px",
     "after:-mt-px",
     "after:!text-sm",
     "after:text-white",

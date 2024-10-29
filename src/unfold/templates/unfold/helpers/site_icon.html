@@ -3,11 +3,11 @@
 {% if site_icon %}
     <a href="{% url "admin:index" %}">
         {% if site_icon.light and site_icon.dark %}
-            <img src="{{ site_icon.dark }}" alt="{% trans 'Home' %}" class="h-8 hidden mr-4 dark:block"/>
+            <img src="{{ site_icon.dark }}" alt="{% trans 'Home' %}" class="h-8 hidden ms-4 dark:block"/>
 
-            <img src="{{ site_icon.light }}" alt="{% trans 'Home' %}" class="block h-8 mr-4 dark:hidden" />
+            <img src="{{ site_icon.light }}" alt="{% trans 'Home' %}" class="block h-8 ms-4 dark:hidden" />
         {% else %}
-            <img src="{{ site_icon }}" class="h-8 mr-4" alt="{% trans 'Home' %}" />
+            <img src="{{ site_icon }}" class="h-8 ms-4" alt="{% trans 'Home' %}" />
         {% endif %}
     </a>
 {% else %}
