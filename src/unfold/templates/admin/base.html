@@ -10,7 +10,7 @@
             {% endblock %}
         {% endif %}
 
-        <div id="main" class="flex-grow">
+        <div id="main" class="flex-grow min-w-0">
             {% include "unfold/helpers/header.html" %}
 
             {% if not is_popup %}
@@ -32,20 +32,18 @@
 
             {% block messages %}
                 <div class="px-4 lg:px-12">
-                    <div class="container mx-auto">
+                    <div class="{% if not cl.model_admin.list_fullwidth %}container{% endif %} mx-auto">
                         {% include "unfold/helpers/messages.html" %}
                     </div>
                 </div>
             {% endblock messages %}
 
             <div class="px-4 pb-12 lg:px-12">
-                <div id="content" class="container mx-auto {% block coltype %}colM{% endblock %}">
+                <div id="content" class="{% if not cl.model_admin.list_fullwidth %}container{% endif %} mx-auto {% block coltype %}colM{% endblock %}">
                     {% if cl %}
-                        {% tab_list cl.opts %}
+                        {% tab_list "changelist" cl.opts %}
                     {% elif opts %}
-                        <div class="mb-8">
-                            {% tab_list opts %}
-                        </div>
+                        {% tab_list "changeform" opts %}
                     {% endif %}
 
                     {% block content %}
