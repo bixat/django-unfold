@@ -62,7 +62,7 @@
                         <button type="submit" class="bg-primary-600 border border-transparent flex flex-row font-semibold group items-center justify-center py-2 rounded-md text-sm text-white w-full">
                             {% translate 'Log in' %}
 
-                            <i class="material-symbols-outlined ms-2 relative start-0 text-lg transition-all group-hover:-start-1">arrow_forward</i>
+                            <i class="material-symbols-outlined ms-2 relative start-0 text-lg transition-all group-hover:-start-1">arrow_{% if LANGUAGE_BIDI %}back{% else %}forward{% endif %} </i>
                         </button>
                     </div>
 
@@ -78,10 +78,10 @@
                 {% block login_after %}{% endblock %}
             </div>
 
-            <div class="absolute flex flex-row items-center justify-between left-0 m-4 start-0 top-0">
+            <div class="absolute flex flex-row items-center justify-between left-0 m-4 right-0 top-0">
                 {% if site_url %}
                     <a href="{{ site_url }}" class="flex font-medium items-center text-sm text-primary-600 dark:text-primary-500">
-                        <span class="material-symbols-outlined ms-2">arrow_back</span> {% trans 'Return to site' %}
+                        <span class="material-symbols-outlined mr-2">arrow_{% if LANGUAGE_BIDI %}forward{% else %}back{% endif %}</span> {% trans 'Return to site' %}
                     </a>
                 {% endif %}
 
