@@ -1,6 +1,4 @@
 window.addEventListener("load", (e) => {
-  submitSearch();
-
   fileInputUpdatePath();
 
   dateTimeShortcutsOverlay();
@@ -135,75 +133,33 @@ const dateTimeShortcutsOverlay = () => {
  * File upload path
  *************************************************************/
 const fileInputUpdatePath = () => {
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "childList") {
-        for (const input of document.querySelectorAll("input[type=file]")) {
-          input.addEventListener("change", (e) => {
-            const parts = e.target.value.split("\\");
-            const placeholder =
-              input.parentNode.parentNode.parentNode.querySelector(
-                "input[type=text]"
-              );
-            placeholder.setAttribute("value", parts[parts.length - 1]);
-          });
-        }
+  const checkInputChanged = () => {
+    for (const input of document.querySelectorAll("input[type=file]")) {
+      if (input.hasChangeListener) {
+        continue;
       }
-    }
-  });
 
-  observer.observe(document.body, {
+      input.addEventListener("change", (e) => {
+        const parts = e.target.value.split("\\");
+        const placeholder =
+          input.parentNode.parentNode.parentNode.querySelector(
+            "input[type=text]"
+          );
+        placeholder.setAttribute("value", parts[parts.length - 1]);
+      });
+
+      input.hasChangeListener = true;
+    }
+  };
+
+  new MutationObserver(() => {
+    checkInputChanged();
+  }).observe(document.body, {
     childList: true,
     subtree: true,
   });
-};
 
-/*************************************************************
- * Search form on changelist view
- *************************************************************/
-const submitSearch = () => {
-  const searchbar = document.getElementById("searchbar");
-  const searchbarSubmit = document.getElementById("searchbar-submit");
-
-  const getQueryParams = (searchString) => {
-    const queryParams = window.location.search
-      .replace("?", "")
-      .split("&")
-      .map((param) => param.split("="))
-      .reduce((values, [key, value]) => {
-        if (key && key !== "q") {
-          values[key] = value;
-        }
-
-        return values;
-      }, {});
-
-    if (searchString) {
-      queryParams["q"] = encodeURIComponent(searchString);
-    }
-
-    const result = Object.entries(queryParams)
-      .map(([key, value]) => `${key}=${value}`)
-      .join("&");
-
-    return `?${result}`;
-  };
-
-  if (searchbar !== null) {
-    searchbar.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        window.location = getQueryParams(e.target.value);
-        e.preventDefault();
-      }
-    });
-  }
-
-  if (searchbarSubmit !== null && searchbar !== null) {
-    searchbarSubmit.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location = getQueryParams(searchbar.value);
-    });
-  }
+  checkInputChanged();
 };
 
 /*************************************************************

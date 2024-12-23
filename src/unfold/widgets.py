@@ -35,7 +35,7 @@ from .exceptions import UnfoldException
 
 LABEL_CLASSES = [
     "block",
-    "font-medium",
+    "font-semibold",
     "mb-2",
     "text-font-important-light",
     "text-sm",
@@ -43,8 +43,8 @@ LABEL_CLASSES = [
 ]
 
 CHECKBOX_LABEL_CLASSES = [
-    "font-medium",
-    "ms-2",
+    "font-semibold",
+    "ml-2",
     "text-sm",
     "text-font-important-light",
     "dark:text-font-important-dark",
@@ -112,7 +112,7 @@ TEXTAREA_EXPANDABLE_CLASSES = [
 
 SELECT_CLASSES = [
     *BASE_INPUT_CLASSES,
-    "ps-8",
+    "pr-8",
     "max-w-2xl",
     "appearance-none",
 ]
@@ -167,7 +167,7 @@ CHECKBOX_CLASSES = [
     "after:justify-center",
     "after:leading-none",
     "after:material-symbols-outlined",
-    "after:-ms-px",
+    "after:-ml-px",
     "after:-mt-px",
     "after:!text-sm",
     "after:text-white",
@@ -332,6 +332,8 @@ class UnfoldAdminImageSmallFieldWidget(FileFieldMixin, AdminFileWidget):
 
 
 class UnfoldAdminDateWidget(AdminDateWidget):
+    template_name = "unfold/widgets/date.html"
+
     def __init__(
         self, attrs: Optional[Dict[str, Any]] = None, format: Optional[str] = None
     ) -> None:
@@ -358,6 +360,8 @@ class UnfoldAdminSingleDateWidget(AdminDateWidget):
 
 
 class UnfoldAdminTimeWidget(AdminTimeWidget):
+    template_name = "unfold/widgets/time.html"
+
     def __init__(
         self, attrs: Optional[Dict[str, Any]] = None, format: Optional[str] = None
     ) -> None:
